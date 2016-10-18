@@ -1,0 +1,18 @@
+.normalBtn {
+    color: white;
+    background: #3982e1;
+}
+.disableBtn{
+    background: #c5c5c5;
+    color: #555555;
+}
+.controlHeader{
+    height: 4rem;
+    border-bottom: 1px solid #000;
+}
+
+.controlHeader .back{
+    float: left;
+    line-height: 4rem;
+    padding: 0 1rem;
+}
