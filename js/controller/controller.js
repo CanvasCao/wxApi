@@ -42,5 +42,23 @@
         });
     }
 
+    controller.checkLineCode = function (params, callback) {
+        $.ajax({
+            type: "get",
+            url: jimiHostRoot + '/checkLineCode.php',
+            dataType: "jsonp",
+            jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+            jsonpCallback: "jsonpcallback",
+            data: params,
+            success: function (data) {
+                callback(data);
+            },
+            error: function (err) {
+                console.log('ERROR!');
+                console.log(err);
+            }
+        });
+    }
+
     w.controller = controller;
 })(window, document, $)
