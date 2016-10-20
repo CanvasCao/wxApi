@@ -16,10 +16,13 @@
             left: 0%;
         }
 
+        /*conInput*/
         .inputWay {
             text-align: center;
             font-size: 2rem;
             margin: 3rem auto;
+            border: 1px solid #d1d1d1;
+            width: 60%;
         }
 
         .bottom {
@@ -48,31 +51,135 @@
             height: 3rem;
             line-height: 3rem;
         }
+
+        /*conMatch*/
+        .matchTitle {
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        .productCon {
+            box-sizing: border-box;
+            width: 80%;
+            border: 1px solid #c1c1c1;
+            margin: 0 auto 1rem;
+            position: relative;
+            padding-left: 7rem;
+            min-height: 7rem;
+
+        }
+
+        .proImg {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 5rem;
+        }
+
+        .textCon {
+        }
+
+        .pName {
+            margin: 1rem 0;
+        }
+
+        .pBrand {
+            margin: 1rem 0;
+
+        }
+
+        .pCat {
+            margin: 1rem 0;
+
+        }
+
+        #finishMatch, #cancelMatch {
+            margin: 1rem auto;
+            width: 50%;
+        }
+
+        /*conNotMatch*/
+        #conNotMatch div:nth-child(1) {
+            text-align: center;
+            margin: 2rem auto;
+        }
+
+        #conNotMatch div:nth-child(2) {
+            text-align: center;
+            margin: 2rem auto;
+            width: 50%;
+        }
+
+        /*productList*/
+        #productList {
+
+        }
+
+        #productTitle {
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        #productCon {
+            height: 30rem;
+            overflow: scroll;
+        }
+
+        #checkShop {
+            width: 50%;
+            margin: 1rem auto;
+        }
     </style>
-    <title>产品录入</title>
+    <title>初始化</title>
 </head>
 <body>
 <div class="container" id='conInput'>
     <div class='inputWay' id='saoma'>条码扫描</div>
     <div class='inputWay' id='shoudong'>手动输入</div>
     <div class='bottom'>
-        <div class='row1'><span class='alreadyInsert'>已录入产品</span><span class='insertCheck'>查看</span></div>
+        <div class='row1'><span class='alreadyInsert'></span><span class='insertCheck' style="display: none">查看</span>
+        </div>
         <div class='finishInsert normalBtn'>完成录入</div>
     </div>
 </div>
-<div class="container" id='conMatch'>匹配成功</div>
-<div class="container" id='conNotMatch'>匹配失败</div>
+<div class="container" id='conMatch'>
+    <div class='matchTitle'>匹配结果</div>
+    <div class='productCon'>
+        <img class='proImg' src="img/logo.jpg"/>
+
+        <div class='textCon'>
+            <div class='pName'></div>
+            <div class='pBrand'></div>
+            <div class='pCat'></div>
+        </div>
+    </div>
+    <div id='finishMatch' class='normalBtn'>完成关联</div>
+    <div id='cancelMatch' class='normalBtn'>取消</div>
+
+</div>
+<div class="container" id='conNotMatch'>
+    <div>未查询到肌秘相关产品</div>
+    <div id='notMatchBack' class='normalBtn'>返回</div>
+</div>
+<div class="container" id='productList'>
+    <div id='productTitle'>产品</div>
+    <div id='productCon'></div>
+    <div id='checkShop' class='normalBtn'>查看店铺</div>
+</div>
 
 <script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/tool/underscore.min.js"></script>
 <script src='js/tool/response.js'></script>
 <script src='js/controller/controller.js'></script>
+<script src='js/globalManager/globalManager.js'></script>
 <script src='js/tool/fastclick.js'></script>
 <script src='js/constant/jimiHost.js'></script>
 
 <script>
     $(function () {
 
+        //debug.........................................................................
         window.onerror = function (sMsg, sUrl, sLine) {
             alert(sMsg);
             alert(sUrl);
@@ -81,15 +188,70 @@
 
         FastClick.attach(document.body);
 
+        //localStorage..............................................................
+        GM.uid = localStorage.getItem('uid');
+        if (!GM.uid) {
+            alert('请先登录');
+            window.location.href = 'login.html';
+        }
+
+        //initGM.............................................................
+        //!!!一个产品六个字段 lineCode pid pname imgUrl brand cat
+        GM.product = null;
+        controller.getProductList({uid: GM.uid},
+                function (json) {
+                    GM.productList = json.list;
+                    updateNumber();
+                })
+
+
         //jqObj..............................................................
         $containers = $('.container');
+        $conMatch = $('#conMatch');
 
         //initDom................................................................
-        $containers.eq(0).show().siblings('.container').hide();
+        showPage('conInput');
 
-        //paras..............................................................
-        var url = 'http://' + window.location.host + window.location.pathname;
+        //bindEvent............................................................
+        //conInput
+        $('.finishInsert').click(function () {
+            showPage('productList');
+            appendProductList();
+        })
 
+        //conMatch
+        $('#cancelMatch').click(function () {
+            showPage('conInput');
+        });
+        $('#finishMatch').click(function () {
+            var index = _.findLastIndex(GM.productList, {lineCode: GM.product.lineCode});
+            //没录过
+            if (index == -1) {
+                GM.productList.push(GM.product);
+
+                controller.saveProduct(GM.product, function () {
+                    GM.product = null;
+                    alert('关联成功');
+                    updateNumber();
+                    showPage('conInput');
+                })
+
+            } else {
+                GM.product = null;
+                alert('该产品已被录入');
+                showPage('conInput');
+            }
+        });
+
+        //notMatch..................................................
+        $('#notMatchBack').click(function () {
+            showPage('conInput');
+        });
+
+        //procuctList........................................
+        $('#checkShop').click(function () {
+            window.location.href = 'shopAuthentication.html';
+        })
 
         //initAjax........................................................
         $.ajax({
@@ -98,15 +260,16 @@
             dataType: "jsonp",
             jsonp: "callback",
             jsonpCallback: "jsonpcallback",
-            data: {url: url},
+            async: false,
+            data: {url: 'http://' + window.location.host + window.location.pathname},
             success: function (data) {
                 console.log(JSON.stringify(data));
 
                 wx.config({
                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: data.appId, // 必填，公众号的唯一标识
-                    timestamp: data.timestamp, // 必填，生成签名的时间戳
-                    nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                    timestamp: data.timestamp + '', // 必填，生成签名的时间戳
+                    nonceStr: data.nonceStr + '', // 必填，生成签名的随机串
                     signature: data.signature,// 必填，签名，见附录1
                     jsApiList: [
 //                        'getLocation',
@@ -118,13 +281,13 @@
 
 
                 wx.error(function (res) {
+                    alert('wxConfigErr')
                     alert(res);
 
                 });
 
                 wx.ready(function () {
                     //bindEvent.............................................................
-
                     $('#saoma').click(function () {
                         wx.scanQRCode({
                             needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
@@ -140,15 +303,27 @@
                                 }, function (json) {
                                     if (Object.prototype.toString.call(json) == "[object Array]") {
                                         var product = json[0];
-                                        var pid = product.pid;
-                                        var imgUrl = product.imgUrl;
-                                        var pname = product.pname;
 
-                                        alert('match');
-                                        $('#conMatch').show().siblings('.container').hide();
+                                        var pid = product.pid;
+                                        var imgUrl = product.imgUrl || 'img/logo.jpg';
+                                        var pname = product.pname;
+                                        var category = product.category;
+                                        var brand = product.brand;
+
+                                        $conMatch.find('.proImg').attr('src', imgUrl);
+                                        $conMatch.find('.pName').html(pname);
+                                        $conMatch.find('.pBrand').html(brand);
+                                        $conMatch.find('.pCat').html(category);
+                                        showPage('conMatch');
+                                        //product应该是数据层的json
+
+                                        GM.product = product;
+                                        GM.product.lineCode = lineCode;
+
+
                                     } else {
-                                        alert('notMatch');
-                                        $('#conNotMatch').show().siblings('.container').hide();
+                                        showPage('conNotMatch');
+                                        GM.product = null;
                                     }
                                 })
                             }
@@ -163,6 +338,45 @@
                 console.log(err);
             }
         });
+
+
+        //staticFns......................................................
+        function showPage(id) {
+            $('#' + id).show().siblings('.container').hide();
+        }
+
+
+        function updateNumber() {
+            $('.alreadyInsert').html('已录入产品(' + GM.productList.length + ')');
+        }
+
+
+        function appendProductList() {
+            var str = '';
+            [].forEach.call(GM.productList, function (e, i, arr) {
+                str += getProductStr(e);
+                str += getProductStr(e);
+                str += getProductStr(e);
+                str += getProductStr(e);
+            });
+
+            $('#productCon').html(str)
+
+            function getProductStr(json) {
+                var str = "<div class='productCon'>" +
+                        "<img class='proImg' src='" + json.imgUrl + "' />" +
+
+                        "<div class='textCon'>" +
+                        "<div class='pName'>" + json.pname + "</div>" +
+                        "<div class='pBrand'>" + json.brand + "</div>" +
+                        "<div class='pCat'>" + json.category + "</div>" +
+                        "</div>" +
+                        "</div>"
+
+                return str;
+            }
+        }
+
     })
 </script>
 </body>

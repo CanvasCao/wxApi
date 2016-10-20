@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/component.css"/>
+    <title>店铺认证</title>
+</head>
+<body>
+
+<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='js/tool/response.js'></script>
+<script src='js/controller/controller.js'></script>
+<script src='js/globalManager/globalManager.js'></script>
+<script src='js/tool/fastclick.js'></script>
+<script src='js/constant/jimiHost.js'></script>
+<script>
+    //debug.........................................................................
+    window.onerror = function (sMsg, sUrl, sLine) {
+        alert(sMsg);
+        alert(sUrl);
+        alert(sLine);
+    }
+
+    FastClick.attach(document.body);
+
+    //localStorage..............................................................
+    GM.uid = localStorage.getItem('uid');
+    if (!GM.uid) {
+        alert('请先登录');
+        window.location.href = 'login.html';
+    }
+
+</script>
+</body>
+</html>

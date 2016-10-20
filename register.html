@@ -40,7 +40,6 @@
         .register {
             text-align: center;
             box-sizing: border-box;
-            padding: 0.5rem 0;
             width: 50%;
             margin: 2rem auto;
         }
@@ -136,7 +135,7 @@
                         console.log(JSON.stringify(json));
                         if (json.success==1) {
                            //注册以后一定是去初始化页面
-                            localStorage.setItem('id',json.id);
+                            localStorage.setItem('uid',json.id);
                             window.location.href = 'marketInit.html';
                         } else if (json.success==0) {
                             alert(json.message);

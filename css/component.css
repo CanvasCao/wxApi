@@ -1,10 +1,16 @@
 .normalBtn {
     color: white;
     background: #3982e1;
+    text-align: center;
+    height: 2.5rem;
+    line-height: 2.5rem;
 }
 .disableBtn{
     background: #c5c5c5;
     color: #555555;
+    text-align: center;
+    height: 2.5rem;
+    line-height: 2.5rem;
 }
 .controlHeader{
     height: 4rem;
