@@ -100,6 +100,21 @@
         });
     }
 
+    controller.updateShopDetail = function (params, callback) {
+        params.uid = GM.uid;
+        $.ajax({
+            type: "post",
+            url: jimiHost + '/updateShopDetail.php',
+            data: params,
+            success: function (data) {
+                callback(data);
+            },
+            error: function (err) {
+                alert('ERROR!');
+                alert(JSON.stringify(err));
+            }
+        });
+    }
 
     w.controller = controller;
 })(window, document, $)

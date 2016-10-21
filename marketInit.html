@@ -250,7 +250,7 @@
 
         //procuctList........................................
         $('#checkShop').click(function () {
-            window.location.href = 'shopAuthentication.html';
+            window.location.replace('shopAuthentication.html');
         })
 
         //initAjax........................................................
@@ -355,9 +355,6 @@
             var str = '';
             [].forEach.call(GM.productList, function (e, i, arr) {
                 str += getProductStr(e);
-                str += getProductStr(e);
-                str += getProductStr(e);
-                str += getProductStr(e);
             });
 
             $('#productCon').html(str)
@@ -375,6 +372,7 @@
 
                 return str;
             }
+
         }
 
     })

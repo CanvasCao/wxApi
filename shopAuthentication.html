@@ -8,8 +8,64 @@
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/component.css"/>
     <title>店铺认证</title>
+    <style type="text/css">
+
+        body {
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        .authTitle {
+            margin: 0.5rem auto;
+        }
+
+        .authInput {
+            border: 1px solid #000;
+            width: 100%;
+            margin: 0.5rem auto;
+            height: 2rem;
+        }
+
+        .authArea {
+            border: 1px solid #000;
+            width: 100%;
+            margin: 0.5rem auto;
+            resize: none;
+        }
+
+        #chooseImg {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #000;
+        }
+
+        #postAuth, #cancelAuth {
+            width: 50%;
+            margin: 1rem auto;
+        }
+    </style>
 </head>
 <body>
+<div id='form'>
+    <div class='authTitle'>门店名称</div>
+    <input class='authInput' name='shopName' type="text" value='屈臣氏（大宁店）'/>
+
+    <div class='authTitle'>门店图片</div>
+
+    <img id='chooseImg' src="img/quchenshi.jpg"/>
+
+    <div class='authTitle'>联系电话</div>
+    <input class='authInput' name='contactNumber' type="text" value='13600000000'/>
+
+    <div class='authTitle'>地址</div>
+    <input class='authInput' name='address' type="text" value="共和新路1978号大宁国际商业广场(延长路地铁站)"/>
+
+    <div class='authTitle'>门店介绍</div>
+    <textarea class='authArea' name="shopIntroduce" rows="3">屈臣氏是长江和记有限公司旗下屈臣氏集团以保健及美容为主的一个品牌。</textarea>
+
+    <div id='postAuth' class='normalBtn'>提交资料</div>
+    <div id='cancelAuth' class='disableBtn'>暂不认证</div>
+</div>
 
 <script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -19,21 +75,115 @@
 <script src='js/tool/fastclick.js'></script>
 <script src='js/constant/jimiHost.js'></script>
 <script>
-    //debug.........................................................................
-    window.onerror = function (sMsg, sUrl, sLine) {
-        alert(sMsg);
-        alert(sUrl);
-        alert(sLine);
-    }
+    $(function () {
+        //debug.........................................................................
+        window.onerror = function (sMsg, sUrl, sLine) {
+            alert(sMsg);
+            alert(sUrl);
+            alert(sLine);
+        }
 
-    FastClick.attach(document.body);
+        FastClick.attach(document.body);
 
-    //localStorage..............................................................
-    GM.uid = localStorage.getItem('uid');
-    if (!GM.uid) {
-        alert('请先登录');
-        window.location.href = 'login.html';
-    }
+        //localStorage..............................................................
+        GM.uid = localStorage.getItem('uid');
+        if (!GM.uid) {
+            alert('请先登录');
+            window.location.href = 'login.html';
+        }
+
+        //jqObj..........................................................
+        $form = $('#form');
+
+        //event router....................................................
+        $('#postAuth').click(function () {
+            controller.updateShopDetail(getShopDetailParams(), function (json) {
+                alert(json);
+                window.location.replace('shopDetail.html');
+            });
+        });
+        $('#cancelAuth').click(function () {
+            window.location.replace('shopDetail.html');
+        });
+
+
+        //initAjax........................................................
+        $.ajax({
+            type: "get",
+            url: jimiHost + '/getWxConfig.php',
+            dataType: "jsonp",
+            jsonp: "callback",
+            jsonpCallback: "jsonpcallback",
+            async: false,
+            data: {url: 'http://' + window.location.host + window.location.pathname},
+            success: function (data) {
+                console.log(JSON.stringify(data));
+
+                wx.config({
+                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: data.appId, // 必填，公众号的唯一标识
+                    timestamp: data.timestamp + '', // 必填，生成签名的时间戳
+                    nonceStr: data.nonceStr + '', // 必填，生成签名的随机串
+                    signature: data.signature,// 必填，签名，见附录1
+                    jsApiList: [
+                        'chooseImage',
+                        'uploadImage',
+//                        'openLocation',
+                        'getLocation',
+                    ]
+                });
+
+
+                wx.error(function (res) {
+                    alert('wxConfigErr')
+                    alert(res);
+                });
+
+                wx.ready(function () {
+                    //bindEvent.............................................................
+                    $('#chooseImg').click(function () {
+                        wx.chooseImage({
+                            count: 1,
+                            success: function (res) {
+                                var localIds = res.localIds;
+                                $('#chooseImg').attr({'src': localIds[0]});
+//                                wx.uploadImage({
+//                                    localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+//                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+//                                    success: function (res) {
+//                                        var serverId = res.serverId; // 返回图片的服务器端ID
+//                                        controller.insertNothing(serverId, function (json) {
+//                                            alert(JSON.stringify(json));
+//                                        })
+//                                    }
+//                                });
+                            }
+                        });
+
+                    })
+
+                })
+
+            },
+            error: function (err) {
+                console.log('ERROR!');
+                console.log(err);
+            }
+        });
+
+
+        //fns................................................................
+        function getShopDetailParams() {
+            var json = {};
+            $form.find('input').each(function (i, e) {
+                json[$(e).attr('name')] = $(e).attr('value');
+            })
+            $form.find('textarea').each(function (i, e) {
+                json[$(e).attr('name')] = $(e).html();
+            })
+            return json;
+        }
+    })
 
 </script>
 </body>

@@ -7,8 +7,53 @@
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/component.css"/>
     <title>店铺详情</title>
+    <style type="text/css">
+        #authStatus {
+            color: green;
+            text-align: center;
+            border: 1px solid black;
+            box-sizing: border-box;
+            padding: 0.2rem 0;
+        }
+
+        #shopDetial {
+
+        }
+
+    </style>
 </head>
 <body>
-123123
+<div id='authStatus'>申请认证认证后，店铺可出现在用户首页</div>
+<div id='shopDetial'>
+    <img id='shopImg' src="img/watsons.jpg"/>
+</div>
+<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='js/tool/response.js'></script>
+<script src='js/controller/controller.js'></script>
+<script src='js/globalManager/globalManager.js'></script>
+<script src='js/tool/fastclick.js'></script>
+<script src='js/constant/jimiHost.js'></script>
+<script>
+    $(function () {
+        //debug.........................................................................
+        window.onerror = function (sMsg, sUrl, sLine) {
+            alert(sMsg);
+            alert(sUrl);
+            alert(sLine);
+        }
+
+        FastClick.attach(document.body);
+
+        //localStorage..............................................................
+        GM.uid = localStorage.getItem('uid');
+        if (!GM.uid) {
+            alert('请先登录');
+            window.location.replace('login.html');
+        }
+
+
+    })
+</script>
 </body>
 </html>

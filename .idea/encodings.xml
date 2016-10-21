@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4" />
+<project version="4">
+  <component name="Encoding">
+    <file url="REMOTE_DEPLOYMENT_FS://&lt;1be49b47-0136-4b04-a892-1ebd9c9dbdf6&gt;/var/www/html/workerman/jimi/apps_T1/WXTESTInterface/updateShopDetail.php" charset="UTF-8" />
+  </component>
+</project>
