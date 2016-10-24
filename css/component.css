@@ -5,20 +5,36 @@
     height: 2.5rem;
     line-height: 2.5rem;
 }
-.disableBtn{
+
+.disableBtn {
     background: #c5c5c5;
     color: #555555;
     text-align: center;
     height: 2.5rem;
     line-height: 2.5rem;
 }
-.controlHeader{
+
+.controlHeader {
     height: 4rem;
+    line-height: 4rem;
     border-bottom: 1px solid #000;
 }
 
-.controlHeader .back{
+.controlHeader .back {
     float: left;
     line-height: 4rem;
     padding: 0 1rem;
+}
+
+.floatBtn {
+    position: fixed;
+    border: 1px solid #000;
+    height: 5rem;
+    line-height: 5rem;
+    text-align: center;
+    width: 5rem;
+    border-radius: 50%;
+    background: lightblue;
+    top: 50%;
+    right: 5%;
 }

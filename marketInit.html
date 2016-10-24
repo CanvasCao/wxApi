@@ -58,41 +58,6 @@
             padding: 1rem;
         }
 
-        .productCon {
-            box-sizing: border-box;
-            width: 80%;
-            border: 1px solid #c1c1c1;
-            margin: 0 auto 1rem;
-            position: relative;
-            padding-left: 7rem;
-            min-height: 7rem;
-
-        }
-
-        .proImg {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            width: 5rem;
-        }
-
-        .textCon {
-        }
-
-        .pName {
-            margin: 1rem 0;
-        }
-
-        .pBrand {
-            margin: 1rem 0;
-
-        }
-
-        .pCat {
-            margin: 1rem 0;
-
-        }
-
         #finishMatch, #cancelMatch {
             margin: 1rem auto;
             width: 50%;
@@ -358,6 +323,8 @@
             });
 
             $('#productCon').html(str)
+            initCSS();
+
 
             function getProductStr(json) {
                 var str = "<div class='productCon'>" +
@@ -373,6 +340,40 @@
                 return str;
             }
 
+            function initCSS() {
+                var $C = $('#productCon');
+
+                $C.find('.productCon').css({
+                    'box-sizing': 'border-box',
+                    width: '80%',
+                    border: '1px solid #c1c1c1',
+                    margin: '0 auto 1rem',
+                    position: 'relative',
+                    'padding-left': '7rem',
+                    'min-height': '7rem',
+                })
+
+                $C.find('.proImg').css({
+                    position: 'absolute',
+                    top: '1rem',
+                    left: '1rem',
+                    width: '5rem',
+                })
+
+                $C.find('.pName').css({
+                    margin: '1rem 0',
+                })
+
+                $C.find('.pBrand').css({
+                    margin: '1rem 0',
+                })
+
+                $C.find('.pCat').css({
+                    margin: '1rem 0',
+                })
+
+
+            }
         }
 
     })

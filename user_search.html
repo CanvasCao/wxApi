@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/component.css"/>
+    <title>肌秘商超 用户首页</title>
+    <style type="text/css">
+
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            top: 0%;
+            left: 0%;
+        }
+
+        #searchBox {
+            height: 2rem;
+            border: 1px solid #000;
+        }
+
+        .fr {
+            float: right;
+            line-height: 4rem;
+            padding: 0 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id='searchInput' class='container'>
+    <div class='controlHeader'>
+        <span class='back'>返回</span>
+        <input id='searchBox' type="text" placeholder="屈臣氏" value="屈臣氏"/>
+        <span class='fr' id="search">搜索</span>
+    </div>
+</div>
+
+<div id='searchResult' class='container'>
+    <div class='controlHeader'>
+        <span class='back'>返回</span>
+    </div>
+    <img src="img/user/searchResult.png" width="100%"/>
+</div>
+<!--<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>-->
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='js/tool/response.js'></script>
+<script src='js/controller/controller.js'></script>
+<script src='js/globalManager/globalManager.js'></script>
+<script src='js/tool/fastclick.js'></script>
+<script src='js/constant/jimiHost.js'></script>
+<script>
+    $(function () {
+
+        //debug.........................................................................
+        window.onerror = function (sMsg, sUrl, sLine) {
+            alert(sMsg);
+            alert(sUrl);
+            alert(sLine);
+        }
+
+        FastClick.attach(document.body);
+
+
+        //init...................................................................
+        showPage('searchInput');
+
+
+        //bindEvent............................................................
+        $('#searchInput .back').click(function () {
+            window.location.replace('user.html');
+        })
+
+        $('#searchResult .back').click(function () {
+            showPage('searchInput');
+        })
+
+        $('#search').click(function () {
+            var str = $('#searchBox').val().trim();
+            if (str == '') {
+                alert('搜索不能为空');
+                return;
+            }
+
+            showPage('searchResult');
+//            controller.direct(jimiHost, 'getProductListBySimpleSearch.php', {str: str}, function (json) {
+//                console.log(JSON.stringify(json));
+//            });
+        })
+
+
+        //staticFns......................................................
+        function showPage(id) {
+            $('#' + id).show().siblings('.container').hide();
+        }
+
+    })
+</script>
+</body>
+</html>

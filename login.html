@@ -121,9 +121,11 @@
                         if (json.success == 1) {
                             localStorage.setItem('uid', json.id);
                             if (json.ifInited == 1) {
+                                //如果该用户已经初始化 跳转到商品详情页
                                 window.location.href = 'shopDetail.html';
                             }
                             else if (json.ifInited == 0) {
+                                //该用户没有初始化 跳转到初始化页面
                                 window.location.href = 'marketInit.html';
                             }
                         } else if (json.success == 0) {

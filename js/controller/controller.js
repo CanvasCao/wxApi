@@ -116,5 +116,23 @@
         });
     }
 
+    controller.direct = function (host, interface, params, callback) {
+        $.ajax({
+            type: "post",
+            url: host + '/' + interface,
+            data: params,
+            dataType: "jsonp",
+            jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+            jsonpCallback: "jsonpcallback",
+            success: function (data) {
+                callback(data);
+            },
+            error: function (err) {
+                alert('ERROR!');
+                alert(JSON.stringify(err));
+            }
+        });
+    }
+
     w.controller = controller;
 })(window, document, $)

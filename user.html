@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/component.css"/>
+    <title>肌秘商超 用户首页</title>
+    <style type="text/css">
+        body {
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        .controlHeader .fl {
+            display: inline-block;
+            width: 33%;
+        }
+
+        .controlHeader .center {
+            display: inline-block;
+            text-align: center;
+            width: 33%;
+        }
+
+        #searchBox {
+            padding: 0.5rem 0;
+            border: 1px solid #000;
+            width: 100%;
+            text-align: center;
+        }
+
+        #skinTest {
+
+        }
+    </style>
+</head>
+<body>
+<div class='controlHeader'>
+    <span class='fl'>上海</span>
+    <span class='center'>肌秘商超</span>
+</div>
+<div id='searchBox'>请输入你想购买的产品名</div>
+<img src="img/user/fontPage.png" alt="" width="100%"/>
+
+<div id='skinTest' class='floatBtn'>肤质检测</div>
+<!--<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>-->
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='js/tool/response.js'></script>
+<script src='js/controller/controller.js'></script>
+<script src='js/globalManager/globalManager.js'></script>
+<script src='js/tool/fastclick.js'></script>
+<script src='js/constant/jimiHost.js'></script>
+<script>
+    $(function () {
+
+        //debug.........................................................................
+        window.onerror = function (sMsg, sUrl, sLine) {
+            alert(sMsg);
+            alert(sUrl);
+            alert(sLine);
+        }
+
+        FastClick.attach(document.body);
+
+
+        $('#searchBox').click(function () {
+            window.location.href = 'user_search.html';
+        })
+
+        $('#skinTest').click(function () {
+            window.location.href = 'user_skinTestMenu.html'
+        })
+    })
+</script>
+</body>
+</html>

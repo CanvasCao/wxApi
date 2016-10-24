@@ -6,27 +6,68 @@
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/component.css"/>
-    <title>店铺详情</title>
+    <title>店铺详情 屈臣氏（大宁店）</title>
     <style type="text/css">
-        #authStatus {
+        body {
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        #authStatusTitle {
             color: green;
             text-align: center;
-            border: 1px solid black;
+            /*border: 1px solid black;*/
             box-sizing: border-box;
             padding: 0.2rem 0;
         }
 
         #shopDetial {
+            position: relative;
+            box-sizing: border-box;
+            margin: 1rem auto;
+            padding-left: 12rem;
 
         }
 
+        #shopImg {
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            width: 10rem;
+        }
+
+        #shopStatus {
+            float: right;
+            color: green;
+        }
     </style>
 </head>
 <body>
-<div id='authStatus'>申请认证认证后，店铺可出现在用户首页</div>
+<div id='authStatusTitle'>申请认证认证后，店铺可出现在用户首页</div>
 <div id='shopDetial'>
     <img id='shopImg' src="img/watsons.jpg"/>
+
+    <div id='shopTxt'>
+        <div id="shopStatus">申请认证</div>
+        完善店铺资料<br>
+        13752483689<br>
+        产品数：359<br>
+    </div>
 </div>
+<div id='hotBrandCon'>
+    <div id='hotBrandTitle'>热门品牌</div>
+    <img src="img/hotBrand.png" width="100%"/>
+</div>
+<div id='hotCategoryCon'>
+    <div id='hotCategoryTitle'>热门分类</div>
+    <img src="img/hotCategory.png" width="100%"/>
+</div>
+<div id='saleProductCon'>
+    <div>在售产品</div>
+</div>
+
+<div id='productRecord' class='floatBtn'>产品录入</div>
+
 <script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src='js/tool/response.js'></script>
@@ -52,6 +93,74 @@
             window.location.replace('login.html');
         }
 
+
+        controller.getProductList({uid: GM.uid}, function (json) {
+            GM.productList = json.list;
+            appendProductList()
+
+            function appendProductList() {
+                var str = '';
+                [].forEach.call(GM.productList, function (e, i, arr) {
+                    str += getProductStr(e);
+                });
+
+                $('#saleProductCon').append(str)
+                initCSS();
+                function initCSS() {
+                    var $C = $('#saleProductCon');
+
+                    $C.find('.productCon').css({
+                        'box-sizing': 'border-box',
+                        width: '80%',
+                        border: '1px solid #c1c1c1',
+                        margin: '0 auto 1rem',
+                        position: 'relative',
+                        'padding-left': '7rem',
+                        'min-height': '7rem',
+                    })
+
+                    $C.find('.proImg').css({
+                        position: 'absolute',
+                        top: '1rem',
+                        left: '1rem',
+                        width: '5rem',
+                    })
+
+                    $C.find('.pName').css({
+                        margin: '1rem 0',
+                    })
+
+                    $C.find('.pBrand').css({
+                        margin: '1rem 0',
+                    })
+
+                    $C.find('.pCat').css({
+                        margin: '1rem 0',
+                    })
+
+
+                }
+
+                function getProductStr(json) {
+                    var str = "<div class='productCon'>" +
+                            "<img class='proImg' src='" + json.imgUrl + "' />" +
+
+                            "<div class='textCon'>" +
+                            "<div class='pName'>" + json.pname + "</div>" +
+                            "<div class='pBrand'>" + json.brand + "</div>" +
+                            "<div class='pCat'>" + json.category + "</div>" +
+                            "</div>" +
+                            "</div>"
+
+                    return str;
+                }
+            }
+        })
+
+
+        $('#productRecord').click(function () {
+
+        })
 
     })
 </script>
