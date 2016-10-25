@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>13</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <style type="text/css">
+        .stepCon {
+            border-bottom: 2rem solid #ededed;
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        .step {
+            background: #a0d5d5;
+            border-radius: 5rem;
+            text-align: center;
+            margin-left: -2rem;
+            font-size: 1.3rem;
+            /*line-height: 1.3rem;*/
+            box-sizing: border-box;
+            padding: 0.2rem 2rem;
+            color: white;
+            display: inline-block;
+            margin-bottom: 0.6rem;
+        }
+
+        .stepTitle {
+            color: #a0d5d5;
+            font-size: 1.3rem;
+        }
+
+        .stepProductSec {
+            border-top: 1px solid #ddd;
+            position: relative;
+            box-sizing: border-box;
+            padding: 1rem;
+            padding-left: 8rem;
+
+        }
+
+        .stepProductImg {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id='body'>
+    <div class='stepCon'>
+        <div class='step'>Step1</div>
+        <div class='stepTitle'>洁面</div>
+        <div class='stepProductCon'>
+            <div class='stepProductSec'>
+                <img src="img/logo.png" class='stepProductImg'/>
+                123<br>123<br>123<br>
+            </div>
+            <div class='stepProductSec'>
+                <img src="img/logo.png" class='stepProductImg'/>
+                123<br>123<br>123<br>
+            </div>
+            <div class='stepProductSec'>
+                <img src="img/logo.png" class='stepProductImg'/>
+                123<br>123<br>123<br>
+            </div>
+            <div class='stepProductSec'>
+                <img src="img/logo.png" class='stepProductImg'/>
+                123<br>123<br>123<br>
+            </div>
+
+        </div>
+    </div>
+    <div class='stepCon'>
+        <div class='step'>Step2</div>
+    </div>
+</div>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='js/tool/response.js'></script>
+
+<script>
+    $(function () {
+        var data = [{
+            "pro": [{
+                "pid": "56c6ada7efb80c9b2541c6d3",
+                "pname": "屈臣氏燕窝多效滋养睡眠面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_5699037f6d498.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|重拾肌肤弹性与活力。",
+                "matching": "0.70"
+            }, {
+                "pid": "56c6ae28efb80c9b2541cafc",
+                "pname": "屈臣氏燕窝多效水润睡眠面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_569903810e15a.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|重拾肌肤弹性与活力。|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复",
+                "matching": "0.70"
+            }, {
+                "pid": "56c6aea1efb80c9b2541cebe",
+                "pname": "屈臣氏燕窝沁白臻颜面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_5699037cd31b3.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|重拾肌肤弹性与活力。",
+                "matching": "0.70"
+            }], "name": "清洁"
+        }, {
+            "pro": [{
+                "pid": "56c6adf7efb80c9b2541c969",
+                "pname": "屈臣氏燕窝沁白臻颜柔肤水",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_56990381bbb6f.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|抗氧化自由基|帮助皮肤抵抗因过敏、蚊虫叮咬等而出现的炎症，促进愈合",
+                "matching": "0.70"
+            }, {
+                "pid": "575ddf21efb80cfa2b8bc940",
+                "pname": "屈臣氏WATER360°矿泉臻润舒缓面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100597621_1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|风一吹就过敏，花儿一碰也能满脸通红，咋整。舒敏小帮手帮助您调节肌肤过敏问题，对抗刺激，提高抵御力。",
+                "matching": "0.70"
+            }, {
+                "pid": "575f3338efb80cfa2b8d15ef",
+                "pname": "屈臣氏植物水活保湿乳液",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100520308_1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|风一吹就过敏，花儿一碰也能满脸通红，咋整。舒敏小帮手帮助您调节肌肤过敏问题，对抗刺激，提高抵御力。",
+                "matching": "0.70"
+            }], "name": "调理"
+        }, {
+            "pro": [{
+                "pid": "56c6ad47efb80c9b2541c3a3",
+                "pname": "屈臣氏燕窝沁白臻颜眼部精华乳",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_56990395984b6.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|重拾肌肤弹性与活力。",
+                "matching": "0.70"
+            }, {
+                "pid": "56f56556efb80c57428c5c77",
+                "pname": "屈臣氏虫草青春悦活眼霜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100458310_1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|重拾肌肤弹性与活力。|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复",
+                "matching": "0.70"
+            }, {
+                "pid": "575ddf21efb80cfa2b8bc940",
+                "pname": "屈臣氏WATER360°矿泉臻润舒缓面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100597621_1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|风一吹就过敏，花儿一碰也能满脸通红，咋整。舒敏小帮手帮助您调节肌肤过敏问题，对抗刺激，提高抵御力。",
+                "matching": "0.70"
+            }], "name": "眼部护理"
+        }, {
+            "pro": [{
+                "pid": "56c6ae4cefb80c9b2541cc27",
+                "pname": "屈臣氏燕窝沁白臻颜精华液",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_569903827126c.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|重拾肌肤弹性与活力。",
+                "matching": "0.70"
+            }, {
+                "pid": "56f56563efb80c57428c5c8a",
+                "pname": "屈臣氏虫草青春悦活肌底调理液",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100458603_2.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|重拾肌肤弹性与活力。|抗氧化自由基",
+                "matching": "0.70"
+            }, {
+                "pid": "575ddf21efb80cfa2b8bc940",
+                "pname": "屈臣氏WATER360°矿泉臻润舒缓面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100597621_1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|风一吹就过敏，花儿一碰也能满脸通红，咋整。舒敏小帮手帮助您调节肌肤过敏问题，对抗刺激，提高抵御力。",
+                "matching": "0.70"
+            }], "name": "精华"
+        }, {
+            "pro": [{
+                "pid": "56f56545efb80c57428c5c5c",
+                "pname": "屈臣氏虫草青春悦活面霜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100458313_1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|重拾肌肤弹性与活力。|去除污垢、皮肤分泌的油脂及化妆品残余，让皮肤更好地吸收水和营养成分，为进一步保养打基础。",
+                "matching": "0.70"
+            }, {
+                "pid": "56f56573efb80c57428c5c9e",
+                "pname": "屈臣氏虫草青春悦活面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100458307_3.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|有抑制黑色素生成的功效，是多数亚洲女性长久不变的追求|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复",
+                "matching": "0.70"
+            }, {
+                "pid": "575ddf21efb80cfa2b8bc940",
+                "pname": "屈臣氏WATER360°矿泉臻润舒缓面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/images/100597621_1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|风一吹就过敏，花儿一碰也能满脸通红，咋整。舒敏小帮手帮助您调节肌肤过敏问题，对抗刺激，提高抵御力。",
+                "matching": "0.70"
+            }], "name": "滋润"
+        }, {
+            "pro": [{
+                "pid": "56c6acefefb80c9b2541c079",
+                "pname": "屈臣氏燕窝+辅酶Q10沁白臻颜面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_569903831f1d1.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|抗氧化自由基|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复",
+                "matching": "0.70"
+            }, {
+                "pid": "56c6ad1aefb80c9b2541c217",
+                "pname": "屈臣氏燕窝+米糠酵素沁白臻颜面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_569903b30f093.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|抗氧化自由基|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复",
+                "matching": "0.70"
+            }, {
+                "pid": "56c6ada7efb80c9b2541c6d3",
+                "pname": "屈臣氏燕窝多效滋养睡眠面膜",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_5699037f6d498.jpg",
+                "desc": "滋润皮肤并防止肌肤蒸发、改善微循环，增强肌肤湿润度|损伤造成机体部分细胞和组织丧失后，机体对所形成缺损进行修补恢复|重拾肌肤弹性与活力。",
+                "matching": "0.70"
+            }], "name": "周期护理"
+        }, {
+            "pro": [{
+                "pid": "56c6acf3efb80c9b2541c0a2",
+                "pname": "屈臣氏骨胶原保湿滋养防晒日霜SPF15",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160114_569763c8988c1.jpg",
+                "desc": "该产品适用于：日常生活中、低海拔地区、春秋冬季节|防晒系数大于10。SPF值一般代表UVB防御能力|平价",
+                "matching": "0.70"
+            }, {
+                "pid": "56c6acf4efb80c9b2541c0ac",
+                "pname": "屈臣氏面部防晒霜 SPF30 PA+++",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_5698ec69badee.jpg",
+                "desc": "拒绝紫外线，拒绝变黑炭|痘肌人群需要根据自身的痤疮严重程度选择性使用|产品含有少量香精",
+                "matching": "0.70"
+            }, {
+                "pid": "56c6ad31efb80c9b2541c2da",
+                "pname": "屈臣氏身体防晒露 SPF30 PA+++",
+                "imgUrl": "http://7xo2me.com1.z0.glb.clouddn.com/proImg/image_20160115_5698ec563ef3d.jpg",
+                "desc": "拒绝紫外线，拒绝变黑炭|痘肌人群需要根据自身的痤疮严重程度选择性使用|产品含有少量香精",
+                "matching": "0.70"
+            }], "name": "防护"
+        }];
+
+
+        var str = '';
+        [].forEach.call(data, function (e, i, arr) {
+            str += "<div class='stepCon'>" +
+                    "<div class='step'>Step" + (i + 1) + "</div>" +
+                    "<div class='stepTitle'>" + e.name + "</div>" +
+                    "<div class='stepProductCon'>" +
+                    getProStr(e.pro) +
+                    "</div>" +
+                    "</div>"
+        })
+        function getProStr(proArr) {
+            var str = '';
+            [].forEach.call(proArr, function (e, i, arr) {
+                str += "<div class='stepProductSec'>" +
+                        "<img src=" + e.imgUrl + " class='stepProductImg'/>" +
+                        getDesc(e.desc) +
+                        "</div>";
+
+                function getDesc(desc) {
+                    var str = '';
+                    [].forEach.call(desc.split('|'), function (e, i, arr) {
+                        str += "<div>" + e + "</div>";
+                    })
+                    return str;
+                }
+            });
+            return str;
+        }
+
+
+        $('#body').html(str);
+    })
+</script>
+</body>
+</html>

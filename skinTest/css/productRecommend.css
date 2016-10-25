@@ -1,0 +1,40 @@
+.stepCon {
+    border-bottom: 2rem solid #ededed;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.step {
+    background: #a0d5d5;
+    border-radius: 5rem;
+    text-align: center;
+    margin-left: -2rem;
+    font-size: 1.3rem;
+    /*line-height: 1.3rem;*/
+    box-sizing: border-box;
+    padding: 0.2rem 2rem;
+    color: white;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+}
+
+.stepTitle {
+    color: #a0d5d5;
+    font-size: 1.3rem;
+}
+
+.stepProductSec {
+    border-top: 1px solid #ddd;
+    position: relative;
+    box-sizing: border-box;
+    padding: 1rem;
+    padding-left: 8rem;
+
+}
+
+.stepProductImg {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 5rem;
+}

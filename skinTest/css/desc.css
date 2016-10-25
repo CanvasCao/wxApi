@@ -1,0 +1,54 @@
+
+.cd {
+    box-sizing: border-box;
+    padding: 1rem 1rem 9rem 1rem;
+    overflow: scroll;
+    height: 100%;
+}
+
+.cd h3 {
+    color: #525252;
+    font-size: 1.4rem;
+}
+
+.cd ul li {
+    width: 100%;
+    border: 1px solid #d7d7d7;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 0 #eaeaea;
+}
+
+.cd ul li h5 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.cd ul li p {
+    font-size: 1.2rem;
+    color: #767676;
+}
+
+.cd .xfc {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+    border-top: 1px solid #d7d7d7;
+}
+
+.cd .xfc div {
+    width: 60%;
+    background: #3881e0;
+    height: 3rem;
+    line-height: 3rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: center;
+    display: block;
+    margin: 0.8rem auto;
+}
