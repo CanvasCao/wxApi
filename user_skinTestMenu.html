@@ -22,7 +22,7 @@
 <div id='btnCon'>
     <div class='btn normalBtn'>做题检测</div>
     <div class='btn disableBtn'>我知道我的肤质</div>
-    <div class='btn disableBtn'>使用肌秘同步肤质数据</div>
+    <div class='btn normalBtn'>使用肌秘同步肤质数据</div>
 </div>
 
 <!--<script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>-->
@@ -48,8 +48,11 @@
             window.location.replace('user.html');
         });
 
-        $('.normalBtn').click(function () {
+        $('#btnCon div').eq(0).click(function () {
             window.location.replace('skinTest/skinTest_Business.html');
+        });
+        $('#btnCon div').eq(2).click(function () {
+            window.location.replace('skinTest/skinTest_Business.html?uid=1&curpage=skinDescPage');
         });
     })
 </script>

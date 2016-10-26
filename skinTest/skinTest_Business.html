@@ -137,14 +137,14 @@
 
         if (!window.location.search) {
             //商超版 uid 代表 商铺id
-            window.location = window.location + '?uid=1';
+            window.location = window.location + '?uid=1&curpage=skinTestPage';
         }
         window.searchJson = searchJson = (window.location.search.searchToJson());
         FastClick.attach(document.body);
 
         //router.js init...................................................
-        Router.$curPage = $('#skinTestPage');
-        $('#skinTestPage').show().siblings('.page').css({left: '200%'});
+        Router.$curPage= (searchJson.curpage)?$('#'+searchJson.curpage):$('#skinTestPage');
+        Router.$curPage.show().siblings('.page').css({left: '200%'});
 
         //Params......................................................
         var result = {}
@@ -263,8 +263,9 @@
             Router.navigateTo($('#productRecommendPage'));
         });
         $('#testAgain').click(function () {
-            window.location.href = window.location.href;
+            window.location.href = 'http://' + window.location.host + window.location.pathname;
         });
+
 
         //Fns...............................................................
         function changeFooter() {

@@ -129,7 +129,7 @@
 <div class="container" id='productList'>
     <div id='productTitle'>产品</div>
     <div id='productCon'></div>
-    <div id='checkShop' class='normalBtn'>查看店铺</div>
+    <div id='checkShop' class='normalBtn'>店铺认证</div>
 </div>
 
 <script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
@@ -192,6 +192,7 @@
             var index = _.findLastIndex(GM.productList, {lineCode: GM.product.lineCode});
             //没录过
             if (index == -1) {
+
                 GM.productList.push(GM.product);
 
                 controller.saveProduct(GM.product, function () {
@@ -279,6 +280,7 @@
                                         $conMatch.find('.pName').html(pname);
                                         $conMatch.find('.pBrand').html(brand);
                                         $conMatch.find('.pCat').html(category);
+                                        initCSS($conMatch);
                                         showPage('conMatch');
                                         //product应该是数据层的json
 
@@ -323,11 +325,12 @@
             });
 
             $('#productCon').html(str)
-            initCSS();
+            initCSS($('#productCon'));
+            bindEvent();
 
 
             function getProductStr(json) {
-                var str = "<div class='productCon'>" +
+                var str = "<div class='productCon' data-pid=" + json.pid + " >" +
                         "<img class='proImg' src='" + json.imgUrl + "' />" +
 
                         "<div class='textCon'>" +
@@ -340,40 +343,48 @@
                 return str;
             }
 
-            function initCSS() {
-                var $C = $('#productCon');
-
-                $C.find('.productCon').css({
-                    'box-sizing': 'border-box',
-                    width: '80%',
-                    border: '1px solid #c1c1c1',
-                    margin: '0 auto 1rem',
-                    position: 'relative',
-                    'padding-left': '7rem',
-                    'min-height': '7rem',
+            function bindEvent() {
+                $('.productCon').click(function () {
+                    var pid = $(this).attr('data-pid');
+                    window.location.href='http://n1.jimi.la/apps_T1/ProductDetailCanvas/ProductDetailShare.html?pid='+pid;
                 })
-
-                $C.find('.proImg').css({
-                    position: 'absolute',
-                    top: '1rem',
-                    left: '1rem',
-                    width: '5rem',
-                })
-
-                $C.find('.pName').css({
-                    margin: '1rem 0',
-                })
-
-                $C.find('.pBrand').css({
-                    margin: '1rem 0',
-                })
-
-                $C.find('.pCat').css({
-                    margin: '1rem 0',
-                })
-
-
             }
+
+
+        }
+
+        function initCSS($C) {
+
+            $C.find('.productCon').css({
+                'box-sizing': 'border-box',
+                width: '80%',
+                border: '1px solid #c1c1c1',
+                margin: '0 auto 1rem',
+                position: 'relative',
+                'padding-left': '7rem',
+                'min-height': '7rem',
+            })
+
+            $C.find('.proImg').css({
+                position: 'absolute',
+                top: '1rem',
+                left: '1rem',
+                width: '5rem',
+            })
+
+            $C.find('.pName').css({
+                margin: '1rem 0',
+            })
+
+            $C.find('.pBrand').css({
+                margin: '1rem 0',
+            })
+
+            $C.find('.pCat').css({
+                margin: '1rem 0',
+            })
+
+
         }
 
     })

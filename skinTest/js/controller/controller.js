@@ -49,7 +49,9 @@
                 }
                 $('#productRecommendPage').html(str);
 
-
+                $('#productRecommendPage').click(function () {
+                    window.location.href='http://n1.jimi.la/apps_T1/ProductDetailCanvas/ProductDetailShare.html?pid='+data[0].pro[0].pid;
+                });
                 callback(data);
             },
             error: function (err) {
