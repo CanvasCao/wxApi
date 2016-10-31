@@ -1,6 +1,7 @@
 .normalBtn {
-    color: white;
-    background: #3982e1;
+    background: #3881e0;
+    color: #fff;
+    border-radius: 1.5rem;
     text-align: center;
     height: 2.5rem;
     line-height: 2.5rem;
@@ -10,19 +11,20 @@
     background: #c5c5c5;
     color: #555555;
     text-align: center;
+    border-radius: 1.5rem;
     height: 2.5rem;
     line-height: 2.5rem;
 }
 
 .controlHeader {
-    height: 4rem;
-    line-height: 4rem;
+    height: 3rem;
+    line-height: 3rem;
     border-bottom: 1px solid #000;
 }
 
 .controlHeader .back {
     float: left;
-    line-height: 4rem;
+    line-height: 3rem;
     padding: 0 1rem;
 }
 
@@ -37,4 +39,32 @@
     background: lightblue;
     top: 50%;
     right: 5%;
+}
+
+
+/*¸Ü¸Ë*/
+.nail {
+    height: 0.8rem;
+    background: #c9ced6;
+    -webkit-border-radius: 0.4rem;
+    border-radius: 0.4rem;
+    position: relative;
+}
+
+.nail:before, .nail:after {
+    content: "";
+    background: white;
+    border-radius: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    position: absolute;
+    top: 0.2rem;
+}
+
+.nail:before {
+    left: 0.2rem;
+}
+
+.nail:after {
+    right: 0.2rem;
 }

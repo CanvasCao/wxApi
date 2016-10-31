@@ -7,74 +7,140 @@
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/component.css"/>
     <style type="text/css">
-        .loginheader {
-            border: 1px solid #000;
-            width: 60%;
-            height: 10rem;
-            text-align: center;
-            font-size: 2rem;
-            line-height: 10rem;
-            margin: 2rem auto;
+        body {
+            background: #f4f6f8;
         }
 
-        .inputCon {
-            /*border: 1px solid #000;*/
-            width: 80%;
-            margin: 1rem auto;
-        }
-
-        .inputCon input {
-            display: block;
-            border: 1px solid #000;
-            width: 100%;
-            margin-bottom: 1.5rem;
-            height: 2.5rem;
-        }
-
-        .register {
-            float: left;
-        }
-
-        .findPwd {
-            float: right;
-        }
-
-        .login {
-            border: 1px solid #000;
-            box-sizing: border-box;
-            width: 50%;
-            margin: 2rem auto;
-        }
-
-        .bottomLogo {
+        .container {
             position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            height: 3rem;
-            /*border: 1px solid #000;*/
+            overflow: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
-        .bottomLogo img {
-            height: 3rem;
-            width: 3rem;
+        .conCenter {
+            /*border: 1px solid #000;*/
+            position: absolute;
+            width: 88%;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%);
         }
+
+        .cloth {
+            box-sizing: border-box;
+            padding: 2rem 0 1.5rem;
+            margin-top: -0.4rem;
+            width: 90%;
+            margin-left: 5%;
+            background: #fff url(img/login/sp_bgimg.png) 0 0 repeat-x;
+            border-bottom-right-radius: 3rem;
+            border-bottom-left-radius: 3rem;
+            position: relative;
+            box-shadow: 0 0.4rem 2rem rgba(202, 208, 216, 0.3);
+        }
+
+        .logoImg {
+            margin: 1rem auto;
+            height: 5rem;
+        }
+
+        .logoText {
+            margin: 1rem auto;
+            height: 1.8rem;
+        }
+
+        .row {
+            border-top: 1px solid #f6f6f6;
+            height: 4.5rem;
+        }
+
+        #phone {
+            background: url(img/login/si_icon01.png) 2.5rem 1.1rem no-repeat;
+        }
+
+        #pwd {
+            background: url(img/login/si_icon02.png) 2.5rem 1.1rem no-repeat;
+        }
+
+        #phone, #pwd {
+            width: 100%;
+            height: 4.5rem;
+            border: none;
+            text-indent: 5rem;
+            font-size: 1.3rem;
+            color: #545454;
+            background-size: auto 2rem;
+        }
+
+        .row span {
+            width: 50%;
+            display: inline-block;
+            text-align: center;
+            line-height: 4.5rem;
+            font-size: 1.3rem;
+            color: #545454;
+        }
+
+        #login {
+            width: 75%;
+            margin: 0rem auto;
+            font-size: 1.3rem;
+            height: 3rem;
+            line-height: 3rem;
+
+        }
+
+        .ajax {
+            text-align: center;
+            border-top: 1px solid #f6f6f6;
+            padding: 4rem 0;
+            font-size: 1.2rem;
+            line-height: 2rem;
+        }
+
+        .ajax img {
+            width: 1.5rem;
+            margin: 0.5rem auto;
+        }
+
+
     </style>
     <title>登录</title>
 </head>
 <body>
-<div class="loginheader">JIMI 商超版</div>
-<div class='inputCon'>
-    <input class='input' type="number" placeholder="请输入手机号" value="13600000000"/>
-    <input class='input' type="password" placeholder="请输入密码" value='13600000000'/>
+<div class="container">
+    <!-- 定位中间 -->
+    <div class="conCenter">
+        <div class="nail"></div>
+        <div class="cloth">
+            <div class='ori'>
+                <img class='logoImg' src="img/login/logo_img.png">
+                <img class='logoText' src="img/login/logo_text.png">
 
-    <div><span class='register'>注册</span><span class='findPwd'>找回密码</span></div>
-    <div style='clear: both'></div>
+                <div style="text-align: center;font-size: 1.2rem;
+    color: #747474;margin: 1rem auto;">肌秘&nbsp&nbsp用科学重新定义美丽
+                </div>
+
+                <div class='row'><input id="phone" type="text" placeholder="请输入手机号" value="13600000000"/></div>
+                <div class='row'><input id="pwd" type="password" placeholder="请输入密码" value="13600000000"/></div>
+                <div class='row'><span id='register'>注册</span><span id='findPwd'>找回密码</span></div>
+                <div class='normalBtn' id="login">登 陆</div>
+            </div>
+
+            <div class="ajax" style="display:none;">
+                <img src="img/login/loading.gif">
+
+                <p>登录中...</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class='login normalBtn'>登录</div>
-<div class='bottomLogo'>
-    <img src="img/logo.jpg"/><span style='line-height: 3rem'>肌秘用科学定义美丽</span>
-</div>
+
 <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src='js/tool/response.js'></script>
 <script src='js/controller/controller.js'></script>
@@ -86,19 +152,15 @@
         FastClick.attach(document.body);
 
         //jqObj.............................
-        var $inputCon = $('.inputCon');
-        var $bottomLogo = $('.bottomLogo');
 
-        //bindEvent..........................
-        $inputCon.find('input').focus(function () {
-            $bottomLogo.hide();
-        }).blur(function () {
-            $bottomLogo.show();
-        })
+        $login = $('#login');
+        $ori = $('.ori');
+        $ajax = $('.ajax');
 
-        $('.login').click(function () {
-                    var moblie = $inputCon.find('input').eq(0).val()
-                    var pwdValueBeforeMD5 = $inputCon.find('input').eq(1).val()
+        //bindEvent...........................
+        $('#login').click(function () {
+                    var moblie = $('#phone').val()
+                    var pwdValueBeforeMD5 = $('#pwd').val()
                     if (moblie == '') {
                         alert('手机号不能为空');
                         return;
@@ -112,32 +174,35 @@
                         return;
                     }
 
-                    controller.login({
-                        pwd: MD5(pwdValueBeforeMD5),
-                        mobile: moblie
-                    }, function (json) {
-                        console.log(JSON.stringify(json));
 
-                        if (json.success == 1) {
-                            localStorage.setItem('uid', json.id);
-                            if (json.ifInited == 1) {
-                                //如果该用户已经初始化 跳转到商品详情页
-                                window.location.href = 'shopDetail.html';
+                    $ori.slideUp();
+                    $ajax.slideDown('slow', function () {
+                        controller.login({
+                            pwd: MD5(pwdValueBeforeMD5),
+                            mobile: moblie
+                        }, function (json) {
+                            console.log(JSON.stringify(json));
+                            if (json.success == 1) {
+                                localStorage.setItem('uid', json.id);
+                                if (json.ifInited == 1) {
+                                    //如果该用户已经初始化 跳转到商品详情页
+                                    window.location.href = 'shopDetail.html';
+                                }
+                                else if (json.ifInited == 0) {
+                                    //该用户没有初始化 跳转到初始化页面
+                                    window.location.href = 'marketInit.html';
+                                }
+                            } else if (json.success == 0) {
+                                alert(json.message);
                             }
-                            else if (json.ifInited == 0) {
-                                //该用户没有初始化 跳转到初始化页面
-                                window.location.href = 'marketInit.html';
-                            }
-                        } else if (json.success == 0) {
-                            alert(json.message);
-                        }
+                        });
                     });
 
 
                 }
         )
 
-        $('.register').click(function () {
+        $('#register').click(function () {
             window.location.href = 'register.html';
         })
 
