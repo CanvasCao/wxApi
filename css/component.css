@@ -3,8 +3,8 @@
     color: #fff;
     border-radius: 1.5rem;
     text-align: center;
-    height: 2.5rem;
-    line-height: 2.5rem;
+    height:3rem;
+    line-height: 3rem;
 }
 
 .disableBtn {
@@ -12,9 +12,11 @@
     color: #555555;
     text-align: center;
     border-radius: 1.5rem;
-    height: 2.5rem;
-    line-height: 2.5rem;
+    height:3rem;
+    line-height:3rem;
 }
+
+
 
 .controlHeader {
     height: 3rem;
@@ -67,4 +69,12 @@
 
 .nail:after {
     right: 0.2rem;
+}
+
+/**/
+.toiletPaper{
+    background: #fff url(../img/login/sp_bgimg.png) 0 -3.25rem repeat-x;
+    border-bottom-right-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    box-shadow: 0 0.4rem 2rem rgba(202, 208, 216, 0.3);
 }

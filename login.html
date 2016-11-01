@@ -36,11 +36,8 @@
             margin-top: -0.4rem;
             width: 90%;
             margin-left: 5%;
-            background: #fff url(img/login/sp_bgimg.png) 0 0 repeat-x;
-            border-bottom-right-radius: 3rem;
-            border-bottom-left-radius: 3rem;
             position: relative;
-            box-shadow: 0 0.4rem 2rem rgba(202, 208, 216, 0.3);
+
         }
 
         .logoImg {
@@ -89,9 +86,6 @@
             width: 75%;
             margin: 0rem auto;
             font-size: 1.3rem;
-            height: 3rem;
-            line-height: 3rem;
-
         }
 
         .ajax {
@@ -116,7 +110,7 @@
     <!-- 定位中间 -->
     <div class="conCenter">
         <div class="nail"></div>
-        <div class="cloth">
+        <div class="cloth toiletPaper">
             <div class='ori'>
                 <img class='logoImg' src="img/login/logo_img.png">
                 <img class='logoText' src="img/login/logo_text.png">
@@ -177,25 +171,28 @@
 
                     $ori.slideUp();
                     $ajax.slideDown('slow', function () {
-                        controller.login({
-                            pwd: MD5(pwdValueBeforeMD5),
-                            mobile: moblie
-                        }, function (json) {
-                            console.log(JSON.stringify(json));
-                            if (json.success == 1) {
-                                localStorage.setItem('uid', json.id);
-                                if (json.ifInited == 1) {
-                                    //如果该用户已经初始化 跳转到商品详情页
-                                    window.location.href = 'shopDetail.html';
-                                }
-                                else if (json.ifInited == 0) {
-                                    //该用户没有初始化 跳转到初始化页面
-                                    window.location.href = 'marketInit.html';
-                                }
-                            } else if (json.success == 0) {
-                                alert(json.message);
-                            }
-                        });
+                        controller.direct(
+                                jimiHost,
+                                'login.php',
+                                {
+                                    pwd: MD5(pwdValueBeforeMD5),
+                                    mobile: moblie,
+                                }, function (json) {
+                                    console.log(JSON.stringify(json));
+                                    if (json.success == 1) {
+                                        localStorage.setItem('uid', json.id);
+                                        if (json.ifInited == 1) {
+                                            //如果该用户已经初始化 跳转到商品详情页
+                                            window.location.href = 'shopDetail.html';
+                                        }
+                                        else if (json.ifInited == 0) {
+                                            //该用户没有初始化 跳转到初始化页面
+                                            window.location.href = 'marketInit.html';
+                                        }
+                                    } else if (json.success == 0) {
+                                        alert(json.message);
+                                    }
+                                });
                     });
 
 
