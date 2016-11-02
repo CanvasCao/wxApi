@@ -6,6 +6,8 @@
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/component.css"/>
+    <link rel="stylesheet" href="css/conInput.css"/>
+    <link rel="stylesheet" href="css/conMatch.css"/>
     <style type="text/css">
         .container {
             position: absolute;
@@ -14,65 +16,6 @@
             overflow: hidden;
             top: 0%;
             left: 0%;
-        }
-
-        /*conInput*/
-        .inputWay {
-            text-align: center;
-            font-size: 2rem;
-            margin: 3rem auto;
-            border: 1px solid #d1d1d1;
-            width: 60%;
-        }
-
-        .bottom {
-            position: absolute;
-            bottom: 0;
-            height: 10rem;
-            width: 100%;
-            border-top: 1px solid black;
-            box-sizing: border-box;
-            padding: 1rem;
-        }
-
-        .alreadyInsert {
-            float: left;
-        }
-
-        .insertCheck {
-            float: right;
-        }
-
-        .finishInsert {
-            clear: both;
-            text-align: center;
-            width: 50%;
-            margin: 3rem auto 0;
-            height: 3rem;
-            line-height: 3rem;
-        }
-
-        /*conMatch*/
-        .matchTitle {
-            box-sizing: border-box;
-            padding: 1rem;
-        }
-
-        #finishMatch, #cancelMatch {
-            margin: 1rem auto;
-            width: 50%;
-        }
-
-        /*conNotMatch*/
-        #conNotMatch div:nth-child(1) {
-            text-align: center;
-            margin: 2rem auto;
-        }
-
-        #conNotMatch div:nth-child(2) {
-            text-align: center;
-            margin: 2rem auto;
-            width: 50%;
         }
 
         /*productList*/
@@ -85,7 +28,7 @@
             padding: 1rem;
         }
 
-        #productCon {
+        #productContainer {
             height: 30rem;
             overflow: scroll;
         }
@@ -99,37 +42,53 @@
 </head>
 <body>
 <div class="container" id='conInput'>
-    <div class='inputWay' id='saoma'>条码扫描</div>
-    <div class='inputWay' id='shoudong'>手动输入</div>
-    <div class='bottom'>
-        <div class='row1'><span class='alreadyInsert'></span><span class='insertCheck' style="display: none">查看</span>
+    <div class="middle">
+        <div class="nail"></div>
+        <div class="toiletPaper">
+            <div class="barCodeMenu">
+                <div class='row' id='saoma'><img src="img/conInput/sm_icon.png" width="42" height="42">扫码录入</div>
+                <div class="row" id="shoudong">手动输入条码</div>
+            </div>
+            <div class="handInputCon" style="display:none;">
+                <div class="row"><input id="barcode" type="text" value='6923492540349' placeholder="请输入条形码"/></div>
+                <div class="row"><span id="confirm">确定</span><span id="cancel">取消</span></div>
+            </div>
         </div>
-        <div class='finishInsert normalBtn'>完成录入</div>
+    </div>
+
+    <div class="bottom">
+        <div class="bottomTop"><span class='alreadyInsert'>已录入产品（92）</span><span class='insertCheck'>查看 ></span></div>
+        <div id='finishInsert' class='normalBtn'> 完成录入</div>
     </div>
 </div>
-<div class="container" id='conMatch'>
-    <div class='matchTitle'>匹配结果</div>
-    <div class='productCon'>
-        <img class='proImg' src="img/logo.jpg"/>
 
-        <div class='textCon'>
-            <div class='pName'></div>
-            <div class='pBrand'></div>
-            <div class='pCat'></div>
+
+<div class="container" id='conMatch'>
+    <div id="resultMask">
+        <div id='resultMaskTop'>
+            <span id='resultMaskTopR'><span id=resultMaskTopRCancel>×</span></span>
+            <span id='resultMaskTopL'>产品匹配结果如下</span>
+        </div>
+        <div id='productCon'>
+            <img id='pImg' src=""/>
+
+            <div id="pName">屈臣氏植物水活保湿乳液</div>
+            <div id="pBrand" style='color:#707070;'>品牌：屈臣氏</div>
+            <div id="pCat" style='color:#707070;'>分类：护肤乳</div>
+            <div id="pBarcode" style='color:#707070;'>条码：1235641657</div>
+            <div id="finishMatch" class='normalBtn'>完成关联</div>
+            <div id='cancelMatch' class='normalBtn'>取消</div>
         </div>
     </div>
-    <div id='finishMatch' class='normalBtn'>完成关联</div>
-    <div id='cancelMatch' class='normalBtn'>取消</div>
-
 </div>
 <div class="container" id='conNotMatch'>
-    <div>未查询到肌秘相关产品</div>
-    <div id='notMatchBack' class='normalBtn'>返回</div>
+    没
 </div>
+
 <div class="container" id='productList'>
-    <div id='productTitle'>产品</div>
-    <div id='productCon'></div>
-    <div id='checkShop' class='normalBtn'>店铺认证</div>
+    <!--<div id='productTitle'>产品</div>-->
+    <!--<div id='productContainer'></div>-->
+    <!--<div id='checkShop' class='normalBtn'>店铺认证</div>-->
 </div>
 
 <script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
@@ -157,7 +116,7 @@
         GM.uid = localStorage.getItem('uid');
         if (!GM.uid) {
             alert('请先登录');
-            window.location.href = 'login.html';
+            window.location.replace('login.html');
         }
 
         //initGM.............................................................
@@ -179,7 +138,7 @@
 
         //bindEvent............................................................
         //conInput
-        $('.finishInsert').click(function () {
+        $('#finishInsert').click(function () {
             showPage('productList');
             appendProductList();
         })
@@ -217,7 +176,7 @@
         //procuctList........................................
         $('#checkShop').click(function () {
             window.location.replace('shopAuthentication.html');
-        })
+        });
 
         //initAjax........................................................
         $.ajax({
@@ -263,40 +222,57 @@
                                 var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
                                 var lineCode = result.split(',')[1];
 
-                                controller.checkLineCode({
-                                    jsoncallback: 1,
-                                    regcode: lineCode,
-                                }, function (json) {
-                                    if (Object.prototype.toString.call(json) == "[object Array]") {
-                                        var product = json[0];
-
-                                        var pid = product.pid;
-                                        var imgUrl = product.imgUrl || 'img/logo.jpg';
-                                        var pname = product.pname;
-                                        var category = product.category;
-                                        var brand = product.brand;
-
-                                        $conMatch.find('.proImg').attr('src', imgUrl);
-                                        $conMatch.find('.pName').html(pname);
-                                        $conMatch.find('.pBrand').html(brand);
-                                        $conMatch.find('.pCat').html(category);
-                                        initCSS($conMatch);
-                                        showPage('conMatch');
-                                        //product应该是数据层的json
-
-                                        GM.product = product;
-                                        GM.product.lineCode = lineCode;
-
-
-                                    } else {
-                                        showPage('conNotMatch');
-                                        GM.product = null;
-                                    }
-                                })
+                                ajaxBarcode(lineCode);
                             }
                         });
-                    })
+                    });
 
+                    $('#shoudong').click(function () {
+                        $('.barCodeMenu').slideUp();
+                        $('.handInputCon').slideDown();
+                    });
+
+                    $('#confirm').click(function () {
+                        var lineCode = $('#barcode').val();
+                        ajaxBarcode(lineCode);
+                    })
+                    $('#cancel').click(function () {
+                        $('.handInputCon').slideUp();
+                        $('.barCodeMenu').slideDown();
+                    });
+
+
+                    function ajaxBarcode(lineCode) {
+                        controller.checkLineCode({
+                            jsoncallback: 1,
+                            regcode: lineCode,
+                        }, function (json) {
+                            if (Object.prototype.toString.call(json) == "[object Array]") {
+                                var product = json[0];
+
+                                var pid = product.pid;
+                                var imgUrl = product.imgUrl || 'img/logo.jpg';
+                                var pname = product.pname;
+                                var category = product.category;
+                                var brand = product.brand;
+
+                                $conMatch.find('#pImg').attr('src', imgUrl);
+                                $conMatch.find('#pName').html(pname);
+                                $conMatch.find('#pBrand').html('品牌：' + brand);
+                                $conMatch.find('#pCat').html('分类：' + category);
+                                $conMatch.find('#pBarcode').html('条码：' + lineCode);
+                                showPage('conMatch');
+                                //product应该是数据层的json
+
+                                GM.product = product;
+                                GM.product.lineCode = lineCode;
+
+                            } else {
+                                showPage('conNotMatch');
+                                GM.product = null;
+                            }
+                        })
+                    }
                 })
 
             },
@@ -324,9 +300,8 @@
                 str += getProductStr(e);
             });
 
-            $('#productCon').html(str)
-            initCSS($('#productCon'));
-            bindEvent();
+            $('#productContainer').html(str)
+            initCSS($('#productContainer'));
 
 
             function getProductStr(json) {
@@ -342,15 +317,6 @@
 
                 return str;
             }
-
-            function bindEvent() {
-                $('.productCon').click(function () {
-                    var pid = $(this).attr('data-pid');
-                    window.location.href='http://n1.jimi.la/apps_T1/ProductDetailCanvas/ProductDetailShare.html?pid='+pid;
-                })
-            }
-
-
         }
 
         function initCSS($C) {

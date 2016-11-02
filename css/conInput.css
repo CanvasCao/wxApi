@@ -1,0 +1,125 @@
+body {
+    background: #f4f6f8;
+}
+
+/*中间定位的两个扫码按钮的容器*/
+.middle {
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.toiletPaper {
+    position: relative;
+    margin-top: -0.4rem;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.row {
+    height: 5rem;
+    display: block;
+    position: relative;
+    line-height: 5rem;
+    text-align: center;
+    font-size: 1.25rem;
+    color: #5c5c5c;
+    border-top: 1px solid #eee;
+}
+
+.barCodeMenu img {
+    display: inline;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: 1.7rem 0.7rem 0 0;
+}
+
+.barCodeMenu div::before {
+    content: ">";
+    width: 2.4rem;
+    height: 2.4rem;
+    line-height: 2.4rem;
+    font-size: 2rem;
+    background: #ccd8e7;
+    color: white;
+    position: absolute;
+    right: 1.4rem;
+    top: 1.3rem;
+    border-radius: 50%;
+}
+
+.handInputCon {
+    display: none;
+}
+
+.handInputCon input {
+    width: 100%;
+    height: 5rem;
+    border: none;
+    text-align: center;
+    background: none;
+    font-size: 1.25rem;
+    line-height: 5rem;
+}
+
+#confirm, #cancel {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 5rem;
+    font-size: 1.25rem;
+    color: #5c5c5c;
+    position: relative;
+}
+
+#confirm::before {
+    content: "";
+    width: 1px;
+    height: 2rem;
+    background: #f6f6f6;
+    z-index: 996;
+    position: absolute;
+    right: 0;
+    top: 1.5rem;
+}
+
+
+/*底部*/
+.bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+}
+
+.bottomTop {
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.bottomTop span {
+    display: inline-block;
+    width: 50%;
+    position: relative;
+    color: #545454;
+    font-size: 1.25rem;
+    line-height: 4.2rem;
+    box-sizing: border-box;
+    padding: 0 1rem;
+}
+
+.alreadyInsert {
+    text-align: left;
+}
+
+.insertCheck {
+    text-align: right;
+}
+
+#finishInsert {
+    width: 80%;
+    height: 3rem;
+    margin: 1rem auto;
+}

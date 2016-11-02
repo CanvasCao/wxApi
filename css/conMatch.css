@@ -1,0 +1,76 @@
+#resultMask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    transform: translateY(-50%) translateX(-50%);
+    /*display: none;*/
+    z-index: 2;
+}
+
+#resultMaskTop {
+    height: 3rem;
+    position: relative;
+}
+
+#resultMaskTopL {
+    box-sizing: border-box;
+    padding: 0 1rem;
+    position: absolute;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.25rem;
+    color: #fff;
+    width: 70%;
+    top: 0;
+    left: 0;
+    background: #90a3bd;
+    border-top-right-radius: 2rem;
+}
+
+#resultMaskTopR {
+    position: absolute;
+    height: 3rem;
+    right: 0;
+    top: 0;
+    width: 35%;
+    background: #dfe4ea;
+    border-top-left-radius: 2rem;
+}
+
+#resultMaskTopRCancel {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    background: #90a3bd;
+    border-radius: 50%;
+    float: right;
+    color: white;
+    font-size: 1.4rem;
+    margin: 0.5rem 0.5rem 0 0;
+}
+
+#productCon {
+    box-sizing: border-box;
+    padding: 1rem 1rem;
+    background: white;
+    text-align: center;
+}
+
+#pImg {
+    margin: 0 auto 1rem;
+    height: 8rem;
+}
+
+#pName {
+    font-size: 1.25rem;
+    color: #494949;
+    line-height: 2rem;
+
+}
+
+#finishMatch, #cancelMatch {
+    width: 80%;
+    margin: 1rem auto;
+}
