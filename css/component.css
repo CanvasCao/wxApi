@@ -16,18 +16,6 @@
     line-height: 3rem;
 }
 
-.controlHeader {
-    height: 3rem;
-    line-height: 3rem;
-    border-bottom: 1px solid #000;
-}
-
-.controlHeader .back {
-    float: left;
-    line-height: 3rem;
-    padding: 0 1rem;
-}
-
 .floatBtn {
     position: fixed;
     border: 1px solid #000;

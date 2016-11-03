@@ -1,0 +1,67 @@
+
+#productListCon {
+    box-sizing: border-box;
+    margin: 1rem auto;
+    width: 90%;
+    height: 76%;
+    /*padding: 0.5rem 1.5rem 0.5rem 1.5rem;*/
+    background: #fff;
+    overflow: scroll;
+    border-radius: 1.5rem;
+    box-shadow: 1px 1px 10px 3px rgba(219, 228, 237, 0.5);
+}
+
+.productSec {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: 2rem;
+    font-size: 1.1rem;
+    color: #545454;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f1f3f4;
+    border-right: 1px solid #f1f3f4;
+    position: relative;
+    overflow: hidden;
+}
+
+.productSec img {
+    height: 5rem;
+    margin: 1rem auto;
+
+}
+
+.pSecTxt {
+    text-align: center;
+    margin: 1rem auto;
+    white-space: nowrap;
+}
+
+.pSecDelete {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    background: #dce3ea;
+    color: white;
+    font-size: 2rem;
+}
+
+#productListBtn {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /*border: 1px solid #000;*/
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+#productListGo, #productListBack {
+    margin: 0.5rem auto;
+    width: 80%;
+}

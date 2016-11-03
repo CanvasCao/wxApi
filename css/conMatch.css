@@ -51,7 +51,7 @@
     margin: 0.5rem 0.5rem 0 0;
 }
 
-#productCon {
+#matchCon {
     box-sizing: border-box;
     padding: 1rem 1rem;
     background: white;
@@ -71,6 +71,27 @@
 }
 
 #finishMatch, #cancelMatch {
+    width: 80%;
+    margin: 1rem auto;
+}
+
+#notMatchCon {
+    box-sizing: border-box;
+    padding: 1rem 1rem;
+    background: white;
+    text-align: center;
+}
+
+#notMatchImg {
+    margin: 0 auto;
+}
+
+#notMatchTxt1, #notMatchTxt2 {
+    color: #707070;
+    margin: 0.5rem auto;
+}
+
+#notMatchBack {
     width: 80%;
     margin: 1rem auto;
 }

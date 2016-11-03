@@ -114,9 +114,9 @@ body {
     text-align: left;
 }
 
-.insertCheck {
-    text-align: right;
-}
+/*.insertCheck {*/
+    /*text-align: right;*/
+/*}*/
 
 #finishInsert {
     width: 80%;

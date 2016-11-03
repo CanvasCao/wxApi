@@ -115,7 +115,7 @@
             jsonp: "callback",
             jsonpCallback: "jsonpcallback",
             async: false,
-            data: {url: 'http://' + window.location.host + window.location.pathname},
+            data: {url: window.location.href+''},
             success: function (data) {
                 console.log(JSON.stringify(data));
 
