@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/conInput.css"/>
     <link rel="stylesheet" href="css/conMatch.css"/>
     <link rel="stylesheet" href="css/conProductList.css"/>
+    <link rel="stylesheet" href="css/conBrandSet.css"/>
     <style type="text/css">
         .container {
             position: absolute;
@@ -38,7 +39,7 @@
     </div>
 
     <div class="bottom">
-        <div class="bottomTop"><span class='alreadyInsert'>已录入产品（92）</span>
+        <div class="bottomTop"><span class='alreadyInsert'>已录入产品</span>
             <!--<span class='insertCheck'>查看 ></span>-->
         </div>
         <div id='finishInsert' class='normalBtn'> 完成录入</div>
@@ -53,10 +54,10 @@
         <div id='matchCon'>
             <img id='pImg' src=""/>
 
-            <div id="pName">屈臣氏植物水活保湿乳液</div>
-            <div id="pBrand" style='color:#707070;'>品牌：屈臣氏</div>
-            <div id="pCat" style='color:#707070;'>分类：护肤乳</div>
-            <div id="pBarcode" style='color:#707070;'>条码：1235641657</div>
+            <div id="pName"></div>
+            <div id="pBrand" style='color:#707070;'></div>
+            <div id="pCat" style='color:#707070;'></div>
+            <div id="pBarcode" style='color:#707070;'></div>
             <div id="finishMatch" class='normalBtn'>完成关联</div>
             <div id='cancelMatch' class='normalBtn'>取消</div>
         </div>
@@ -69,12 +70,37 @@
         </div>
     </div>
 </div>
-
 <div class="container" id='conProductList'>
-    <div id='productListCon'></div>
+    <div id='productListCon' class='listContainer'></div>
     <div id='productListBtn'>
         <div id='productListGo' class='normalBtn'>进入热门品牌设置</div>
         <div id='productListBack' class='normalBtn'>返回</div>
+    </div>
+</div>
+<div class="container" id='conBrandSet'>
+    <div id='brandListCon' class='listContainer'>
+        <span class='listSec'>
+            <img src="img/logo.jpg" class='brandImg'/>
+            <div class='brandTxt'>123</div>
+            <div class='brandSelect'>√</div>
+        </span><span class='listSec'>
+            <img src="img/logo.jpg" class='brandImg'/>
+            <div class='brandTxt'>123</div>
+            <div class='brandSelect'>√</div>
+        </span><span class='listSec'>
+            <img src="img/logo.jpg" class='brandImg'/>
+            <div class='brandTxt'>123</div>
+            <div class='brandSelect'>√</div>
+        </span><span class='listSec'>
+            <img src="img/logo.jpg" class='brandImg'/>
+            <div class='brandTxt'>123</div>
+            <div class='brandSelect'>√</div>
+        </span>
+
+    </div>
+    <div id='brandListBtn'>
+        <div id='brandListGo' class='normalBtn'>进入热门分类设置</div>
+        <div id='brandListBack' class='normalBtn'>返回</div>
     </div>
 </div>
 
@@ -89,82 +115,23 @@
 <script src='js/globalManager/globalManager.js'></script>
 <script src='js/constant/jimiHost.js'></script>
 <script src='js/searchToJson/searchToJson.js'></script>
+<script src='js/pageInit/marketInit.js'></script>
 
 <script>
     $(function () {
         FastClick.attach(document.body);
         window.searchJson = searchJson = (window.location.search.searchToJson());
 
-        //localStorage.......................................................
+        //localStorage.................................................
         GM.uid = localStorage.getItem('uid');
         if (!GM.uid) {
             alert('请先登录');
             window.location.replace('login.html');
         }
 
-        //jqObj..............................................................
-        $containers = $('.container');
-        $alreadyInsert = $('.alreadyInsert');
-        $bottom = $('.bottom');
-
-        $barCodeMenu = $('.barCodeMenu');
-        $handInputCon = $('.handInputCon');
-
-
-        //bindEvent............................................................
-        //conInput 中 点击完成录入显示产品列表................
-        $('#finishInsert').click(function () {
-            pageManager.goPush('conProductList');
-            appendProductList();
-        });
-
-        //barcode 输入框 点击 底部消失.............
-        $('#barcode').focus(function () {
-            $bottom.hide();
-        }).blur(function () {
-            $bottom.show();
-        })
-
-        //conMatch 中 取消关联 直接返回输入界面................
-        $('#cancelMatch').click(function () {
-            pageManager.go('conInput');
-        });
-        //conMatch 中 关联 如果录入过则直接返回 没录入过则存库................
-        $('#finishMatch').click(function () {
-            var index = _.findLastIndex(GM.productList, {lineCode: GM.product.lineCode});
-            //没录过
-            if (index == -1) {
-
-                GM.productList.push(GM.product);
-
-                controller.saveProduct(GM.product, function () {
-                    GM.product = null;
-                    alert('关联成功');
-                    updateNumber();
-                    pageManager.go('conInput');
-                })
-
-            } else {
-                GM.product = null;
-                alert('该产品已被录入');
-                pageManager.go('conInput');
-            }
-        });
-
-        //notMatch..................................................
-        $('#notMatchBack').click(function () {
-            pageManager.go('conInput');
-        });
-
-        //procuctList........................................
-        $('#productListGo').click(function () {
-            window.location.href = 'shopAuthentication.html';
-        });
-        $('#productListBack').click(function () {
-            history.back();
-        })
-
-        //initAjax........................................................
+//        pageManager.go('conProductList');
+//        pageManager.go('conBrandSet');
+        //initAjax......................................................
         $.ajax({
             type: "get",
             url: jimiHost + '/getWxConfig.php',
@@ -175,16 +142,6 @@
             data: {url: window.location.href + ''},
             success: function (data) {
                 console.log(JSON.stringify(data));
-
-                //initGM.............................................................
-                //!!!一个产品六个字段 lineCode pid pname imgUrl brand cat
-                GM.product = null;
-                controller.getProductList({uid: GM.uid},
-                        function (json) {
-                            GM.productList = json.list;
-                            updateNumber();
-                            appendProductList();
-                        });
 
                 wx.config({
                     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -208,38 +165,19 @@
                 });
 
                 wx.ready(function () {
-                    //bindEvent.............................................................
-                    $('#saoma').click(function () {
-                        wx.scanQRCode({
-                            needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-                            scanType: ["barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-                            success: function (res) {
-                                var errMsg = res.errMsg;
-                                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                                var lineCode = result.split(',')[1];
+                    //initGM.............................................................
+                    //!!!一个产品六个字段 lineCode pid pname imgUrl brand cat
+                    GM.product = null;
+                    controller.getProductList({uid: GM.uid},
+                            function (json) {
+                                GM.productList = json.list;
+                                conInput.updateProNum();
+                            });
 
-                                ajaxBarcode(lineCode);
-                            }
-                        });
-                    });
-
-                    $('#shoudong').click(function () {
-                        $barCodeMenu.slideUp();
-                        $handInputCon.slideDown();
-                        $('#barcode').focus();
-                    });
-
-                    $('#confirm').click(function () {
-                        var lineCode = $('#barcode').val();
-                        if (lineCode.trim() == '') {
-                            return;
-                        }
-                        ajaxBarcode(lineCode);
-                    })
-                    $('#cancel').click(function () {
-                        $barCodeMenu.slideDown();
-                        $handInputCon.slideUp();
-                    });
+                    conInput.init();
+                    conMatch.init();
+                    conProductList.init();
+                    conBrandSet.init();
 
                 })
 
@@ -250,61 +188,6 @@
             }
         });
 
-
-        //staticFns......................................................
-        function updateNumber() {
-            $alreadyInsert.html('已录入产品(' + GM.productList.length + ')');
-        }
-
-        function ajaxBarcode(lineCode) {
-            controller.checkLineCode({
-                jsoncallback: 1,
-                regcode: lineCode,
-            }, function (json) {
-                if (Object.prototype.toString.call(json) == "[object Array]") {
-                    $conMatch = $('#matchCon');
-
-                    var product = json[0];
-                    var pid = product.pid;
-                    var imgUrl = product.imgUrl || 'img/logo.jpg';
-                    var pname = product.pname;
-                    var category = product.category;
-                    var brand = product.brand;
-
-                    $conMatch.find('#pImg').attr('src', imgUrl);
-                    $conMatch.find('#pName').html(pname);
-                    $conMatch.find('#pBrand').html('品牌：' + brand);
-                    $conMatch.find('#pCat').html('分类：' + category);
-                    $conMatch.find('#pBarcode').html('条码：' + lineCode);
-
-                    pageManager.go('conMatch');
-                    $('#matchCon').show();
-                    $('#notMatchCon').hide();
-
-                    //product应该是数据层的json
-                    GM.product = product;
-                    GM.product.lineCode = lineCode;
-
-                } else {
-                    pageManager.go('conMatch');
-                    $('#matchCon').hide();
-                    $('#notMatchCon').show();
-                    GM.product = null;
-                }
-            })
-        }
-
-        function appendProductList() {
-            var str = '';
-            [].forEach.call(GM.productList, function (e, i, arr) {
-                str += "<span class='productSec'>" +
-                        "<img src=" + e.imgUrl + " />" +
-                        "<div class='pSecTxt'>" + e.pname + "</div>" +
-                        "<div class='pSecDelete'>×</div>" +
-                        "</span>"
-            })
-            $('#productListCon').html(str);
-        }
     })
 </script>
 </body>

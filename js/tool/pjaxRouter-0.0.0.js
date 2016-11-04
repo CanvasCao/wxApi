@@ -41,7 +41,7 @@
             that.go(pageName);
 
             var state = {pageName: pageName};
-            history.pushState(state, '', '?x=' + pageName);
+            history.pushState(state, '', '?pageName=' + pageName);
         },
     }
     w.pageManager = pageManager;

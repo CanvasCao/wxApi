@@ -1,3 +1,4 @@
+/*通用按钮*/
 .normalBtn {
     background: #3881e0;
     color: #fff;
@@ -16,6 +17,8 @@
     line-height: 3rem;
 }
 
+
+/*浮动的测试按钮*/
 .floatBtn {
     position: fixed;
     border: 1px solid #000;
@@ -62,4 +65,30 @@
     border-bottom-right-radius: 3rem;
     border-bottom-left-radius: 3rem;
     box-shadow: 0 0.4rem 2rem rgba(202, 208, 216, 0.3);
+}
+
+.listContainer{
+    box-sizing: border-box;
+    margin: 1rem auto;
+    width: 90%;
+    height: 76%;
+    /*padding: 0.5rem 1.5rem 0.5rem 1.5rem;*/
+    background: #fff;
+    overflow: scroll;
+    border-radius: 1.5rem;
+    box-shadow: 1px 1px 10px 3px rgba(219, 228, 237, 0.5);
+}
+.listSec{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: 2rem;
+    font-size: 1.1rem;
+    color: #545454;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f1f3f4;
+    border-right: 1px solid #f1f3f4;
+    position: relative;
+    overflow: hidden;
 }

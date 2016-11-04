@@ -1,24 +1,16 @@
-
-#productListCon {
-}
-
-.productSec {
+.brandImg {
+    height: 4rem;
+    margin: 0rem auto;
 
 }
 
-.productSec img {
-    height: 5rem;
-    margin: 1rem auto;
-
-}
-
-.pSecTxt {
+.brandTxt {
     text-align: center;
-    margin: 1rem auto;
+    margin: 0.5rem auto 0rem;
     white-space: nowrap;
 }
 
-.pSecDelete {
+.brandSelect {
     position: absolute;
     right: 1rem;
     top: 1rem;
@@ -27,12 +19,12 @@
     height: 2rem;
     line-height: 2rem;
     text-align: center;
-    background: #dce3ea;
+    background: #3881e0;
     color: white;
-    font-size: 2rem;
+    font-family: '微软雅黑';
 }
 
-#productListBtn {
+#brandListBtn {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -41,7 +33,7 @@
     padding: 1rem;
 }
 
-#productListGo, #productListBack {
+#brandListGo, #brandListBack {
     margin: 0.5rem auto;
     width: 80%;
 }
