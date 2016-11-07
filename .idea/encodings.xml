@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="REMOTE_DEPLOYMENT_FS://&lt;1be49b47-0136-4b04-a892-1ebd9c9dbdf6&gt;/var/www/html/workerman/jimi/apps_T1/WXTEST/js/pageInit/marketInit.js" charset="UTF-8" />
-    <file url="REMOTE_DEPLOYMENT_FS://&lt;1be49b47-0136-4b04-a892-1ebd9c9dbdf6&gt;/var/www/html/workerman/jimi/apps_T1/WXTESTInterface/getHot.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/css/conBrandSet.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/js/pageInit/marketInit.js" charset="UTF-8" />
   </component>

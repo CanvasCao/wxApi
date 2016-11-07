@@ -184,7 +184,6 @@
         bindEvent: function () {
             var that = this;
             this.$C = this.$container;
-
             this.$C.find('#productListGo').click(function () {
                 pageManager.goPush('conBrandSet');
                 conBrandSet._appendHotBrand();
@@ -229,6 +228,14 @@
         bindEvent: function () {
             var that = this;
             this.$C = this.$container;
+
+            this.$C.find('#brandListGo').click(function () {
+                pageManager.goPush('conCatSet');
+                conCatSet._appendHotCatDom();
+            });
+            this.$C.find('#brandListBack').click(function () {
+                history.back();
+            });
         },
         _appendHotBrand: function () {
             var that = this;
@@ -236,10 +243,74 @@
                 'getHot.php', {
                     uid: GM.uid
                 }, function (json) {
-                    //that.$container.html(JSON.stringify(json));
-                })
+                    GM.arrayBrand = json.arrayBrand;
+                    GM.arrayCat = json.arrayCat;
+                    GM.hotBrand = json.hotBrand;
+                    GM.hotCat = json.hotCat;
+
+                    that._appendHotBrandDom();
+                });
+        },
+        _appendHotBrandDom: function () {
+            var that = this;
+            var str = '';
+            [].forEach.call(GM.arrayBrand, function (e, i, arr) {
+                var logo = e.logo || 'img/logo.jpg';
+                str += "<span class='listSec'>" +
+                    "<img src=" + logo + " class='brandImg' />" +
+                    "<div class='brandTxt'>" + e.brand + "</div>" +
+                    "<div class='brandSelect'>√</div>" +
+                    "</span>"
+            })
+
+            this.$container.find('#brandListCon').html(str);
         },
     }
     window.conBrandSet = conBrandSet;
 })
-(window, document, $, 'conProductList')
+(window, document, $, 'conBrandSet')
+
+;
+(function () {
+    var conCatSet = {
+        $container: $('#conCatSet'),
+        pageName: 'conCatSet',
+        JM: {},
+        init: function () {
+            this.createDom();
+            this.initCSS();
+            this.bindEvent();
+        },
+        createDom: function () {
+        },
+        initCSS: function () {
+        },
+        bindEvent: function () {
+            var that = this;
+            this.$C = this.$container;
+
+
+            this.$C.find('#catListGo').click(function () {
+                pageManager.goPush('conShop');
+            });
+            this.$C.find('#catListBack').click(function () {
+                history.back();
+            });
+        },
+        _appendHotCatDom: function () {
+            var that = this;
+            var str = '';
+            [].forEach.call(GM.arrayCat, function (e, i, arr) {
+                str += "<span class='listSec'>" +
+                    "<div class='catTxt'>" + e + "</div>" +
+                    "<div class='catSelect'>√</div>" +
+                    "</span>"
+            })
+
+            this.$container.find('#catListCon').html(str);
+        }
+
+    }
+    window.conCatSet = conCatSet;
+})
+(window, document, $, 'conCatSet')

@@ -78,30 +78,23 @@
     </div>
 </div>
 <div class="container" id='conBrandSet'>
-    <div id='brandListCon' class='listContainer'>
-        <span class='listSec'>
-            <img src="img/logo.jpg" class='brandImg'/>
-            <div class='brandTxt'>123</div>
-            <div class='brandSelect'>√</div>
-        </span><span class='listSec'>
-            <img src="img/logo.jpg" class='brandImg'/>
-            <div class='brandTxt'>123</div>
-            <div class='brandSelect'>√</div>
-        </span><span class='listSec'>
-            <img src="img/logo.jpg" class='brandImg'/>
-            <div class='brandTxt'>123</div>
-            <div class='brandSelect'>√</div>
-        </span><span class='listSec'>
-            <img src="img/logo.jpg" class='brandImg'/>
-            <div class='brandTxt'>123</div>
-            <div class='brandSelect'>√</div>
-        </span>
-
-    </div>
+    <div id='brandListCon' class='listContainer'></div>
     <div id='brandListBtn'>
         <div id='brandListGo' class='normalBtn'>进入热门分类设置</div>
         <div id='brandListBack' class='normalBtn'>返回</div>
     </div>
+</div>
+<div class="container" id='conCatSet'>
+    <div id='catListCon' class='listContainer'>
+    </div>
+    <div id='catListBtn'>
+        <div id='catListGo' class='normalBtn'>进入店铺</div>
+        <div id='catListBack' class='normalBtn'>返回</div>
+    </div>
+</div>
+
+<div class="container" id='conShop'>
+    这是一个店铺
 </div>
 
 <script src='http://res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
@@ -161,7 +154,6 @@
                 wx.error(function (res) {
                     alert('wxConfigErr')
                     alert(JSON.stringify(res));
-
                 });
 
                 wx.ready(function () {
@@ -178,7 +170,7 @@
                     conMatch.init();
                     conProductList.init();
                     conBrandSet.init();
-
+                    conCatSet.init();
                 })
 
             },

@@ -1,3 +1,4 @@
+/*分类和品牌的css合起来*/
 .brandImg {
     height: 4rem;
     margin: 0rem auto;
@@ -34,6 +35,39 @@
 }
 
 #brandListGo, #brandListBack {
+    margin: 0.5rem auto;
+    width: 80%;
+}
+
+/*分类的css*/
+.catTxt {
+    text-align: center;
+    margin: 0.5rem auto 0rem;
+    white-space: nowrap;
+}
+
+.catSelect {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    background: #3881e0;
+    color: white;
+    font-family: '微软雅黑';
+}
+#catListBtn {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /*border: 1px solid #000;*/
+    box-sizing: border-box;
+    padding: 1rem;
+}
+#catListGo, #catListBack {
     margin: 0.5rem auto;
     width: 80%;
 }
