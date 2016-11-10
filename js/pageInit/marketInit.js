@@ -291,7 +291,7 @@
 
 
             this.$C.find('#catListGo').click(function () {
-                pageManager.goPush('conShop');
+                window.location.href='shopDetail.html';
             });
             this.$C.find('#catListBack').click(function () {
                 history.back();

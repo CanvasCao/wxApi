@@ -160,11 +160,11 @@
                     //initGM.............................................................
                     //!!!一个产品六个字段 lineCode pid pname imgUrl brand cat
                     GM.product = null;
-                    controller.getProductList({uid: GM.uid},
-                            function (json) {
-                                GM.productList = json.list;
-                                conInput.updateProNum();
-                            });
+
+                    controller.direct(jimiHost, 'getProductList.php', {uid: GM.uid}, function (json) {
+                        GM.productList = json.list;
+                        conInput.updateProNum();
+                    });
 
                     conInput.init();
                     conMatch.init();

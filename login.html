@@ -101,6 +101,14 @@
             margin: 0.5rem auto;
         }
 
+        #checkDemo {
+            position: absolute;
+            bottom: 1rem;
+            width: 100%;
+            text-align: center;
+            color: blue;
+            text-decoration: underline;
+        }
 
     </style>
     <title>登录</title>
@@ -119,8 +127,8 @@
     color: #747474;margin: 1rem auto;">肌秘&nbsp&nbsp用科学重新定义美丽
                 </div>
 
-                <div class='row'><input id="phone" type="text" placeholder="请输入手机号" value="13600000000"/></div>
-                <div class='row'><input id="pwd" type="password" placeholder="请输入密码" value="13600000000"/></div>
+                <div class='row'><input id="phone" type="text" placeholder="请输入手机号" value=""/></div>
+                <div class='row'><input id="pwd" type="password" placeholder="请输入密码" value=""/></div>
                 <div class='row'><span id='register'>注册</span><span id='findPwd'>找回密码</span></div>
                 <div class='normalBtn' id="login">登 陆</div>
             </div>
@@ -132,6 +140,8 @@
             </div>
         </div>
     </div>
+    <div id='checkDemo'>查看示例</div>
+
 </div>
 
 
@@ -201,6 +211,31 @@
 
         $('#register').click(function () {
             window.location.href = 'register.html';
+        })
+
+        $('#checkDemo').click(function () {
+            controller.direct(
+                    jimiHost,
+                    'login.php',
+                    {
+                        pwd: MD5('13600000000'),
+                        mobile: '13600000000',
+                    }, function (json) {
+                        console.log(JSON.stringify(json));
+                        if (json.success == 1) {
+                            localStorage.setItem('uid', json.id);
+                            if (json.ifInited == 1) {
+                                //如果该用户已经初始化 跳转到商品详情页
+                                window.location.href = 'shopDetail.html';
+                            }
+                            else if (json.ifInited == 0) {
+                                //该用户没有初始化 跳转到初始化页面
+                                window.location.href = 'marketInit.html';
+                            }
+                        } else if (json.success == 0) {
+                            alert(json.message);
+                        }
+                    });
         })
 
     })

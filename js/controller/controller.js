@@ -80,7 +80,9 @@
         });
     }
 
-    controller.direct = function (host, interface, params, callback) {
+    controller.direct = function (host, interface, params, callback, ajaxParams) {
+        var ajaxParams = ajaxParams || {};
+
         $.ajax({
             type: "get",
             url: host + '/' + interface,
